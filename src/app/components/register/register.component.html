@@ -1,0 +1,44 @@
+<div class="container">
+  <div class="card">
+    <h1>Registrarse</h1>
+
+     <div class="campo">
+      <label>Nombre:</label>
+      <!-- Two-way Binding: [(ngModel)] sincroniza el input con la variable "name" del .ts -->
+      <input type="text" [(ngModel)]="name" placeholder="Ingresa tu nombre" />
+    </div>
+
+    <div class="campo">
+      <label>Apellido:</label>
+      <!-- Two-way Binding: [(ngModel)] sincroniza el input con la variable "lastName" del .ts -->
+      <input type="text" [(ngModel)]="lastName" placeholder="Ingresa tu apellido" />
+    </div>
+
+     <div class="campo">
+      <label>Email:</label>
+      <!-- Two-way Binding: [(ngModel)] sincroniza el input con la variable "email" del .ts -->
+      <input type="email" [(ngModel)]="email" placeholder="ingresa tu email" />
+    </div>
+
+    <div class="campo">
+      <label>Contraseña:</label>
+      <!-- Two-way Binding: [(ngModel)] sincroniza el input con la variable "password" del .ts -->
+      <input type="password" [(ngModel)]="password" placeholder="ingresa tu contraseña" />
+    </div>
+
+    <!-- Event Binding: (click) ejecuta el método login() del .ts al hacer clic -->
+    <!-- Property Binding: [disabled] enlaza la propiedad disabled con una condición del .ts -->
+    <button type="button" (click)="register()" [disabled]="name === '' || lastName === '' || email === '' || password === ''">Registrarse</button>
+
+    <!-- @if: muestra el párrafo solo si "mensaje" no está vacío (control de flujo Angular 17+) -->
+    @if (mensaje !== '') {
+      <!-- Interpolación: {{ }} muestra el valor de la variable "mensaje" del .ts -->
+      <p class="mensaje">{{ mensaje }}</p>
+    }
+
+    <p class="volver">
+      <!-- Event Binding: (click) ejecuta goToHome() para navegar a la página de inicio -->
+      <a (click)="goToHome()">← Volver al inicio</a>
+    </p>
+  </div>
+</div>
