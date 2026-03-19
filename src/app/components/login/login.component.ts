@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -14,25 +15,18 @@ export class LoginComponent {
   password: string = '';
   mensaje: string = '';
 
-  constructor(private router: Router) {}
+  constructor(private authService: AuthService, private router: Router) {}
 
   login() {
-    // Validación básica
-    if (this.email === '' || this.password === '') {
-      this.mensaje = 'Por favor completá todos los campos.';
-      return;
-    }
-
-    // Credenciales de prueba (hardcodeadas para aprender)
-    if (this.email === 'admin@mail.com' && this.password === '1234') {
-      this.mensaje = '¡Login exitoso! Bienvenido.';
+    const user = this.authService.login(this.email, this.password);
+    if (user) {
+      this.mensaje = `¡Login exitoso! Bienvenido, ${user.nombre}.`;
     } else {
       this.mensaje = 'Email o contraseña incorrectos.';
     }
   }
 
-    goToRegister() {
+  goToRegister() {
     this.router.navigate(['/register']);
   }
 }
-

@@ -10,3 +10,4 @@ export const routes: Routes = [
     { path: '', redirectTo: 'home', pathMatch: 'full' },
     { path: '**', redirectTo: 'home' }, // Wildcard route: si la ruta no existe, redirige a home Importante siempre al final
 ];
+

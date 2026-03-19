@@ -70,19 +70,22 @@ button:disabled {
 .mensaje {
   text-align: center;
   margin-top: 16px;
+  font-size: 14px;
+}
+
+.exito {
+  color: #2e7d32;
+}
+
+.error {
   color: #c62828;
-  font-size: 14px;
 }
 
-.volver {
-  text-align: center;
-  margin-top: 16px;
+.btn-login {
+  background-color: #43a047;
+  margin-top: 12px;
 }
 
-.volver a {
-  color: #3f51b5;
-  cursor: pointer;
-  font-size: 14px;
-  text-decoration: underline;
+.btn-login:hover {
+  background-color: #2e7d32;
 }
-
