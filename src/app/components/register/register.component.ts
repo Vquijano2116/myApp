@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms'; // <-- necesario para usar [(ngModel)]
+import { Component, inject } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 
@@ -10,26 +10,25 @@ import { AuthService } from '../../services/auth.service';
   styleUrl: './register.component.css',
 })
 export class RegisterComponent {
-// Propiedades enlazadas con el HTML mediante Two-way Binding [(ngModel)]
+  private router = inject(Router);
+  private authService = inject(AuthService);
+
   nombre: string = '';
   email: string = '';
   password: string = '';
   confirmPassword: string = '';
   mensaje: string = '';
-  exito: boolean = false; // controla el color del mensaje y si mostrar el botón de login
-
-  // Inyección de dependencias: Router para navegar, AuthService para registrar usuarios
-  constructor(private router: Router, private authService: AuthService) {}
+  exito: boolean = false;
 
   register() {
-    // Validación: las contraseñas deben coincidir antes de intentar registrar
     if (this.password !== this.confirmPassword) {
       this.mensaje = 'Las contraseñas no coinciden.';
       this.exito = false;
       return;
     }
 
-    // Se delega el registro al AuthService - retorna true si se registró, false si el email ya existe
+    // AuthService guarda el usuario en su array interno
+    // Ese mismo usuario ya puede usarse para hacer login
     const ok = this.authService.register(this.nombre, this.email, this.password);
     if (ok) {
       this.mensaje = `¡Registro exitoso! Bienvenido, ${this.nombre}.`;
@@ -40,7 +39,6 @@ export class RegisterComponent {
     }
   }
 
-  // Navega a /login usando el Router (programmatic navigation)
   goToLogin() {
     this.router.navigate(['/login']);
   }
